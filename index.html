@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name=description content="Records Yusong JS 30 days notes and demo">
+    <meta name=author content=Hsunight>
+    <meta property=og:title content="Yusong JS 30 days">
+    <meta property=og:type content="website">
+    <meta property=og:url content="https://sky172839465.github.io/js30">
+    <meta property=og:image content="https://sky172839465.github.io/js30/img/js30.png">
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />    
+    <meta property=og:description content="Records Yusong JS 30 days notes and demo">
+    <meta property=og:site_name content="JS30">  
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+        a.btn.btn-link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Yusong JS 30 days</a>
+        </nav>        
+    </header>
+
+    <section>
+        <div class="container my-2 table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-auto">#</th>
+                        <th scope="col" class="col">Course Name</th>
+                        <th scope="col" class="col">Demo</th>
+                        <th scope="col" class="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody class="course-list-area">
+                </tbody>
+            </table>            
+        </div>
+    </section>
+
+    <footer>
+        <p class="text-center">Yusong Hsu &copy; 2018</p>
+    </footer>
+
+    <script>
+        const courseListArea = document.querySelector('.course-list-area');
+        const courseList = [
+            { name: 'JavaScript Drum Kit', finish: false },
+            { name: 'CSS + JS Clock', finish: true },
+            { name: 'Playing with CSS Variables and JS', finish: false },
+            { name: 'Array Cardio Day 1', finish: false },
+            { name: 'Flex Panels Image Gallery', finish: false },
+            { name: 'Ajax Type Ahead', finish: false },
+            { name: 'Array Cardio Day 2', finish: false },
+            { name: 'Fun with HTML5 Canvas', finish: false },
+            { name: '14 Must Know Dev Tools Tricks', finish: false },
+            { name: 'Hold Shift to Check Multiple Checkboxes', finish: false },
+            { name: 'Custom HTML5 Video Player', finish: false },
+            { name: 'Key Sequence Detection (KONAMI CODE)', finish: false },
+            { name: 'Slide In on Scroll', finish: false },
+            { name: 'Object and Arrays - Reference VS Copy', finish: false },
+            { name: 'LocalStorage and Event Delegation', finish: false },
+            { name: 'CSS Text Shadow Mouse Move Effect', finish: false },
+            { name: 'Sorting Band Names without articles', finish: false },
+            { name: 'Tally String Times with Reduce', finish: false },
+            { name: 'Unreal Webcam Fun', finish: false },
+            { name: 'Native Speech Recognition', finish: false },
+            { name: 'Geolocation based Speedometer and Compass', finish: false },
+            { name: 'Follow Along Links', finish: false },
+            { name: 'Speech Synthesis', finish: false },
+            { name: 'Sticky Nav', finish: false },
+            { name: 'Event Capture, Propagation, Bubbling and Once', finish: false },
+            { name: 'Stripe Follow Along Dropdown', finish: false },
+            { name: 'Click and Drag to Scroll', finish: false },    
+            { name: 'Video Speed Controller UI', finish: false },
+            { name: 'Countdown Clock', finish: false },
+            { name: 'Whack A Mole Game', finish: false }                     
+        ];
+        const demoHomeLink = 'https://sky172839465.github.io/js30';
+        const noteHomeLink = 'https://github.com/sky172839465/sky172839465.github.io/tree/master/js30';
+
+        generatorCourseList(courseList);
+
+        function generatorCourseList(courseList) {
+            courseList.forEach((course, index) => {
+                let tableRow = document.createElement('tr'),
+                    indexCol = document.createElement('th'),
+                    nameCol = document.createElement('td'),
+                    demoCol = document.createElement('td'),
+                    noteCol = document.createElement('td'),
+                    courseIndex = (index + 1),
+                    courseRef = (courseIndex < 10) ? `0${courseIndex}` : `${courseIndex}`;
+
+                indexCol.setAttribute('scope', 'row');
+                indexCol.textContent = `${courseRef}`;
+                nameCol.textContent = course.name;
+
+                if (course.finish) {
+                    let linkStyle = ['btn', 'btn-link'],
+                        demoLink = document.createElement('a'),
+                        noteLink = document.createElement('a');
+
+                    demoLink.classList.add(...linkStyle);
+                    demoLink.href = `${demoHomeLink}/${courseRef}`;
+                    demoLink.setAttribute('target', '_blank');
+                    demoLink.textContent = 'Demo';
+                    demoCol.appendChild(demoLink);
+                    noteLink.classList.add(...linkStyle);
+                    noteLink.href = `${noteHomeLink}/${courseRef}`;
+                    noteLink.setAttribute('target', '_blank');
+                    noteLink.textContent = 'Note';
+                    noteCol.appendChild(noteLink);
+                } else {
+                    demoCol.textContent = 'pending';
+                    noteCol.textContent = 'pending';
+                }
+
+                tableRow.appendChild(indexCol);
+                tableRow.appendChild(nameCol);
+                tableRow.appendChild(demoCol);
+                tableRow.appendChild(noteCol);
+                courseListArea.appendChild(tableRow);
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>    
+</body>
+</html>
