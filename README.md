@@ -1,5 +1,5 @@
 # JS30
-Records Yusong JS 30 days notes and demo
+Records Yusong JS 30 days note and demo
 
 Go to [Homepage][] see more detail !
 
