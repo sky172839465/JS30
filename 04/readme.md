@@ -6,4 +6,3 @@
 3. ```querySelector```出來的元素可以再次使用querySelector
 4. NodeList沒有map這個function，需要轉成Array型態，[ES5]```Array.from(NodeList)```、[ES6 Spread syntax] ```[...NodeList]```
 5. 判斷字串包含內容可以用```indexOf(text) !== -1```或```includes(text)```
-6. 
