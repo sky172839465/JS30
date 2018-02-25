@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=description content="Records Yusong JS 30 days note and demo">
+  <meta name=author content=Hsunight>
+  <meta property=og:title content="CH09 Console Tricks!">
+  <meta property=og:type content="website">
+  <meta property=og:url content="https://sky172839465.github.io/js30/09">
+  <meta property=og:image content="https://sky172839465.github.io/js30/img/js30.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />    
+  <meta property=og:description content="Records Yusong JS 30 days note and demo">
+  <meta property=og:site_name content="JS30">  
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">    
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('hello I am a %s string', 'test');
+
+    // Styled
+    console.log('hello %c world', 'color:lightblue');
+
+    // warning!
+    console.warn('warn!');
+
+    // Error :|
+    console.error('error!');
+
+    // Info
+    console.info('info!');
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('Testing'), 'Testing isn\'t exist!');
+
+    // clearing
+    // console.clear();
+
+    // Viewing DOM Elements
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}.`);
+      console.log(`may age is ${dog.age}.`);
+      console.groupEnd(`${dog.name}`);
+    })
+
+    // counting
+    console.count('test 1');
+    console.count('test 2');
+    console.count('test 1');
+    console.count('test 1');
+    console.count('test 2');
+    console.count('test 1');
+    
+
+    // timing
+    console.time('fetching Data');
+    fetch('https://api.github.com/users/sky172839465')
+      .then(blob => blob.json())
+      .then(data => {
+        console.timeEnd('fetching Data');
+        console.log(data);
+      });
+
+    // table
+    console.table(dogs);
+  </script>
+</body>
+</html>
