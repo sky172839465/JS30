@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=description content="Records Yusong JS 30 days note and demo">
+  <meta name=author content=Hsunight>
+  <meta property=og:title content="CH12 Key Detection">
+  <meta property=og:type content="website">
+  <meta property=og:url content="https://sky172839465.github.io/js30/12">
+  <meta property=og:image content="https://sky172839465.github.io/js30/img/js30.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />    
+  <meta property=og:description content="Records Yusong JS 30 days note and demo">
+  <meta property=og:site_name content="JS30">  
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">  
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  const pressed = [];
+  const secretCode = 'yusong';
+
+  window.addEventListener('keyup', (e) => { 
+    pressed.push(e.key);
+    // 從第幾個取值, 取幾個值
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+    if (pressed.join('').includes(secretCode)) {
+      console.log('hi!');
+      cornify_add();
+    }
+
+    console.log(pressed);
+  });
+</script>
+</body>
+</html>
