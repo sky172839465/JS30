@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=description content="Records Yusong JS 30 days note and demo">
+  <meta name=author content=Hsunight>
+  <meta property=og:title content="CH14 Reference VS Copy">
+  <meta property=og:type content="website">
+  <meta property=og:url content="https://sky172839465.github.io/course/js30/14">
+  <meta property=og:image content="https://sky172839465.github.io/course/js30/img/js30.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />    
+  <meta property=og:description content="Records Yusong JS 30 days note and demo">
+  <meta property=og:site_name content="JS30">  
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">  
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
+    age2 = 400;
+    console.log(age, age2);
+
+    let name = 'Yusong';
+    let name2 = name;
+    console.log(name, name2);
+    name += ' Hsu';
+    console.log(name, name2);
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+    // let team = players;
+    // console.log(team, players);
+    // team[3] = 'Yusong';
+    // console.log(team, players);
+
+    // You might think we can just do something like this:
+
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+    const team2 = players.slice();
+    console.log(team2, players);
+    team2[3] = 'Yusong';
+    console.log(team2, players);
+
+    // or create a new array and concat the old one in
+    const team3 = [].concat(players);
+    console.log(team3, players);
+    team3[3] = 'Yusong';
+    console.log(team3, players);    
+
+    // or use the new ES6 Spread
+    const team4 = [...players];
+    console.log(team4, players);
+    team4[3] = 'Yusong';
+    console.log(team4, players);    
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+
+    // and think we make a copy:
+    // const captain = person;
+    // captain.age = 50;
+    // console.log(person);
+
+    // how do we take a copy instead?
+    const cap = Object.assign({}, person, { num: 50, age: 25 });
+    console.log(cap);
+    console.log(person);
+
+    // We will hopefully soon see the object ...spread
+    const cap2 = { ...person };
+    cap2.age = 66;
+    console.log(cap2);
+    console.log(person);
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const hsunight = {
+      name: 'Yusong',
+      age: 25,
+      social: {
+        facebook: 'Hsunight',
+        line: '@sky172839465'
+      }
+    };
+    console.log(hsunight);
+    // const dev = Object.assign({}, hsunight);
+    // const dev = { ...hsunight };
+    const dev = JSON.parse(JSON.stringify(hsunight));
+    dev.social.facebook = 'develop';
+    console.log(hsunight);
+
+  </script>
+
+</body>
+</html>
