@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click and Drag</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=description content="Records Yusong JS 30 days note and demo">
+  <meta name=author content=Hsunight>
+  <meta property=og:title content="CH27 Click and Drag">
+  <meta property=og:type content="website">
+  <meta property=og:url content="https://sky172839465.github.io/course/js30/27">
+  <meta property=og:image content="https://sky172839465.github.io/course/js30/img/js30.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />    
+  <meta property=og:description content="Records Yusong JS 30 days note and demo">
+  <meta property=og:site_name content="JS30">    
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="items">
+    <div class="item item1">01</div>
+    <div class="item item2">02</div>
+    <div class="item item3">03</div>
+    <div class="item item4">04</div>
+    <div class="item item5">05</div>
+    <div class="item item6">06</div>
+    <div class="item item7">07</div>
+    <div class="item item8">08</div>
+    <div class="item item9">09</div>
+    <div class="item item10">10</div>
+    <div class="item item11">11</div>
+    <div class="item item12">12</div>
+    <div class="item item13">13</div>
+    <div class="item item14">14</div>
+    <div class="item item15">15</div>
+    <div class="item item16">16</div>
+    <div class="item item17">17</div>
+    <div class="item item18">18</div>
+    <div class="item item19">19</div>
+    <div class="item item20">20</div>
+    <div class="item item21">21</div>
+    <div class="item item22">22</div>
+    <div class="item item23">23</div>
+    <div class="item item24">24</div>
+    <div class="item item25">25</div>
+  </div>
+
+<script>
+  const slider = document.querySelector('.items');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  function handleMouseDown(e) {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    console.log({startX, scrollLeft});
+  }
+
+  function handleMouseLeave() {
+    isDown = false;
+    slider.classList.remove('active');
+  }
+
+  function handleMouseUp() {
+    isDown = false;
+    slider.classList.remove('active');
+  }
+
+  function handleMouseMove(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+    console.log({ x, startX });
+  }
+
+  slider.addEventListener('mousedown', handleMouseDown);
+  slider.addEventListener('mouseleave', handleMouseLeave);
+  slider.addEventListener('mouseup', handleMouseUp);
+  slider.addEventListener('mousemove', handleMouseMove);
+</script>
+
+  </body>
+</html>
