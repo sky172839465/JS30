@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Speed Scrubber</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name=description content="Records Yusong JS 30 days note and demo">
+  <meta name=author content=Hsunight>
+  <meta property=og:title content="CH28 Video Speed Scrubber">
+  <meta property=og:type content="website">
+  <meta property=og:url content="https://sky172839465.github.io/course/js30/28">
+  <meta property=og:image content="https://sky172839465.github.io/course/js30/img/js30.png">
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />    
+  <meta property=og:description content="Records Yusong JS 30 days note and demo">
+  <meta property=og:site_name content="JS30">    
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+
+<script>
+  const speed = document.querySelector('.speed');
+  const bar = document.querySelector('.speed-bar');
+  const video = document.querySelector('.flex');
+
+  function handleMouseMove(e) {
+    const y = e.pageY - this.offsetTop;
+    const percent = y / this.offsetHeight;
+    const min = 0.4;
+    const max = 4;
+    const height = Math.round(percent * 100) + '%';
+    const playbackRate = percent * (max - min) + min;
+    bar.style.height = height;
+    bar.textContent = playbackRate.toFixed(2) + 'x';
+    video.playbackRate = playbackRate;
+    console.log(e);
+    console.log(playbackRate);
+    console.log(percent);   
+  }
+
+  speed.addEventListener('mousemove', handleMouseMove);
+  // speed.addEventListener('touchmove', handleMouseMove);
+</script>
+</body>
+</html>
