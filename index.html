@@ -105,45 +105,45 @@
         generatorCourseList(courseList);
 
         function generatorCourseList(courseList) {
+            let table = [];
             courseList.forEach((course, index) => {
-                let tableRow = document.createElement('tr'),
-                    indexCol = document.createElement('th'),
-                    nameCol = document.createElement('td'),
-                    demoCol = document.createElement('td'),
-                    noteCol = document.createElement('td'),
+                let html, demo, note,
                     courseIndex = (index + 1),
                     courseRef = (courseIndex < 10) ? `0${courseIndex}` : `${courseIndex}`;
 
-                indexCol.setAttribute('scope', 'row');
-                indexCol.textContent = `${courseRef}`;
-                nameCol.textContent = course.name;
-
                 if (course.finish) {
-                    let linkStyle = ['btn', 'btn-link'],
-                        demoLink = document.createElement('a'),
-                        noteLink = document.createElement('a');
+                    demo = `
+                        <a 
+                            class="btn btn-link" 
+                            target="_blank"
+                            href="${demoHomeLink}/${courseRef}">
+                            Demo
+                        </a>
+                    `;
 
-                    demoLink.classList.add(...linkStyle);
-                    demoLink.href = `${demoHomeLink}/${courseRef}`;
-                    demoLink.setAttribute('target', '_blank');
-                    demoLink.textContent = 'Demo';
-                    demoCol.appendChild(demoLink);
-                    noteLink.classList.add(...linkStyle);
-                    noteLink.href = `${noteHomeLink}/${courseRef}/readme.md`;
-                    noteLink.setAttribute('target', '_blank');
-                    noteLink.textContent = 'Note';
-                    noteCol.appendChild(noteLink);
+                    note = `
+                        <a 
+                            class="btn btn-link" 
+                            target="_blank"
+                            href="${noteHomeLink}/${courseRef}/readme.md">
+                            Note
+                        </a>
+                    `;
                 } else {
-                    demoCol.textContent = 'pending';
-                    noteCol.textContent = 'pending';
+                    demo = '<span>pending</span>';
+                    note = '<span>pending</span>';
                 }
-
-                tableRow.appendChild(indexCol);
-                tableRow.appendChild(nameCol);
-                tableRow.appendChild(demoCol);
-                tableRow.appendChild(noteCol);
-                courseListArea.appendChild(tableRow);
+                html = `
+                    <tr>
+                        <th scope="row">${courseRef}</th>
+                        <td>${course.name}</td>
+                        <td>${demo}</td>
+                        <td>${note}</td>                            
+                    </tr>
+                `;
+                table.push(html);
             });
+            courseListArea.innerHTML = table.join('');
         }
     </script>
 
